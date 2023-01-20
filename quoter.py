@@ -117,17 +117,27 @@ class MainWindow(ttk.Frame):
         self.quote_msg.config(text=f"'{quote}'")
         self.author_lbl.config(text=author)
 
+    def check_response(self, response):
+        if response is not None:
+            return response
+        messagebox.showerror(title="Error!", message="Invalid proxy settings!")
+        return None
+
     def new_quote(self) -> None:
         self.response = APIFunctions.get_response(
             "https://zenquotes.io/api/random", SettingsWindow.get_settings(self)
         )
-        self.display_content(self.response, "normal")
+        api_response = self.check_response(self.response)
+        if api_response is not None:
+            self.display_content(api_response, "normal")
 
     def today_quote(self) -> None:
         self.response = APIFunctions.get_response(
             "https://zenquotes.io/api/today", SettingsWindow.get_settings(self)
         )
-        self.display_content(self.response, "disabled")
+        api_response = self.check_response(self.response)
+        if api_response is not None:
+            self.display_content(api_response, "disabled")
 
     def display_content(
         self, response: requests.Response, today_btn_state: str
