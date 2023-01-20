@@ -1,13 +1,12 @@
 # Quoter
 
-This is a demo project to test out the [ZenQuotes API](https://zenquotes.io).
-It uses Tkinter for the GUI.
+This is a demo project to test out the [ZenQuotes API](https://zenquotes.io) and demonstrate OOP with Tkinter.
 
 ## Features
 
-- Get random quote
-- Get quote of today
-- Set a proxy
+- Get a random quote
+- Get the quote of today
+- Set a proxy in settings
 
 ## Run Locally
 
