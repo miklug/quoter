@@ -190,5 +190,7 @@ poetry.toml
 .ionide
 
 mac_venv/
-
+.DS_Store
+mySettings.db
+.vscode/
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python
