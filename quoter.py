@@ -1,8 +1,20 @@
 import contextlib
 import os
+import sys
 import shelve
 import tkinter as tk
-from tkinter import BOTTOM, END, LEFT, TOP, Frame, Label, Message, Text, messagebox
+from tkinter import (
+    BOTTOM,
+    END,
+    LEFT,
+    TOP,
+    Frame,
+    Label,
+    Message,
+    Text,
+    messagebox,
+    PhotoImage,
+)
 from tkinter.ttk import Button
 
 import requests
@@ -47,7 +59,7 @@ class MainWindow(ttk.Frame):
             justify="center",
             bg="#2b3e50",
             fg="#ffffff",
-            aspect="500",
+            aspect=500,
             width=300,
         )
         self.author_lbl = Label(self.top_frame, font=("Helvetica 10"))
@@ -106,16 +118,16 @@ class MainWindow(ttk.Frame):
         self.author_lbl.config(text=author)
 
     def new_quote(self) -> None:
-        response = APIFunctions.get_response(
+        self.response = APIFunctions.get_response(
             "https://zenquotes.io/api/random", SettingsWindow.get_settings(self)
         )
-        self.display_content(response, "normal")
+        self.display_content(self.response, "normal")
 
     def today_quote(self) -> None:
-        response = APIFunctions.get_response(
+        self.response = APIFunctions.get_response(
             "https://zenquotes.io/api/today", SettingsWindow.get_settings(self)
         )
-        self.display_content(response, "disabled")
+        self.display_content(self.response, "disabled")
 
     def display_content(
         self, response: requests.Response, today_btn_state: str
@@ -135,7 +147,7 @@ class SettingsWindow(tk.Toplevel):
         super().__init__(parent)
 
         self.title("Quoter - Settings")
-        self.iconbitmap(bitmap=ICON_PATH, default=ICON_PATH)
+        # self.iconbitmap(bitmap=ICON_PATH, default=ICON_PATH)
         self.geometry("520x90")
         self.resizable(False, False)
 
@@ -184,10 +196,13 @@ class App(tk.Tk):
 
         ttk.Style("superhero")
         self.title("Quoter")
-        self.iconbitmap(
-            bitmap=ICON_PATH,
-            default=ICON_PATH,
-        )
+        if sys.platform.startswith("win"):
+            self.iconbitmap(
+                bitmap=ICON_PATH,
+                default=ICON_PATH,
+            )
+        else:
+            self.call("wm", "iconphoto", self, PhotoImage(file=PNG_PATH))
         self.geometry("500x300")
         self.resizable(False, False)
 
@@ -195,9 +210,8 @@ class App(tk.Tk):
 if __name__ == "__main__":
     SETTINGS = shelve.open("mySettings")
     BASE_DIR = os.path.dirname(__file__)
-    OLDER_ICON_PATH = r"icon/quoter.ico"
-    OLD_ICON_PATH = f"{os.path.dirname(os.path.abspath(__file__))}/quoter.ico"
     ICON_PATH = os.path.join(BASE_DIR, "icon", "quoter.ico")
+    PNG_PATH = os.path.join(BASE_DIR, "icon", "quoter.png")
     app = App()
     frame = MainWindow(app)
     app.mainloop()
