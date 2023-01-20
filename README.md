@@ -1,6 +1,6 @@
 # Quoter
 
-This is a demo project to test out the [ZenQuotes API](https://zenquotes.io) and demonstrate OOP with Tkinter.
+This is a demo project to test out the [ZenQuotes API](https://zenquotes.io/api) and demonstrate OOP with Tkinter.
 
 ## Features
 
@@ -46,6 +46,7 @@ Note: On Linux and macOS you have to use `pip3` and `python3`.
 
 - [Python](https://github.com/python/)
 - [TkInter](https://docs.python.org/3/library/tkinter.html)
+- [ttkbootstrap](https://github.com/israel-dryer/ttkbootstrap)
 - [PyInstaller](https://pyinstaller.org/en/stable/)
 - Inspirational quotes provided by [ZenQuotes](https://zenquotes.io)
 
