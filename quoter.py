@@ -158,15 +158,15 @@ class SettingsWindow(tk.Toplevel):
 
         self.title("Quoter - Settings")
         # self.iconbitmap(bitmap=ICON_PATH, default=ICON_PATH)
-        self.geometry("520x90")
-        self.resizable(False, False)
+        self.geometry("600x90")
+        self.resizable(True, True)
 
         self.__create_widgets()
 
     def __create_widgets(self) -> None:
 
         self.proxy_lbl = Label(self, text="Proxy:")
-        self.settings_txt = Text(self, height=1, width=50, wrap="none")
+        self.settings_txt = Text(self, height=1, width=40, wrap="none")
         self.settings_txt.insert(END, self.get_settings())
 
         self.cancel_button = Button(
